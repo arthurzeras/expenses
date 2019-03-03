@@ -84,8 +84,14 @@
               >
                 Fechar
               </button>
-              <button class="btn btn-primary">
-                Incluir novo gasto
+              <button class="btn btn-primary" :disabled="loading">
+                <template v-if="loading">
+                  <i class="fa fa-spin fa-spinner"></i>
+                  Incluindo...
+                </template>
+                <template v-else>
+                  Incluir novo gasto
+                </template>
               </button>
             </div>
           </div>
@@ -104,6 +110,7 @@
 <script>
 export default {
   data: () => ({
+    loading: false,
     showModal: false,
     form: {
       value: '',
@@ -133,6 +140,7 @@ export default {
     },
     async submit () {
       let url = ''
+      this.loading = true
 
       try {
         this.$root.$emit('Spinner::show')
@@ -157,15 +165,29 @@ export default {
 
         ref.child(id).set(payload, err => {
           if (err) {
-            console.error(err)
+            this.$root.$emit('Notification::show', {
+              type: 'danger',
+              message: 'Não foi possível inserir o gasto, tente novamente.'
+            })
+            this.loading = false
           } else {
+            this.$root.$emit('Notification::show', {
+              type: 'success',
+              message: 'Gasto inserido com sucesso.'
+            })
             this.closeModal()
+            this.loading = false
           }
         })
       } catch (err) {
-        console.error(err)
+        this.$root.$emit('Notification::show', {
+          type: 'danger',
+          message: 'Não foi possível inserir o gasto, tente novamente.'
+        })
+        this.loading = false
       } finally {
         this.$root.$emit('Spinner::hide')
+        this.loading = false
       }
     },
     closeModal () {

@@ -60,7 +60,23 @@ export default {
 
         this.$router.push({ name: 'home' })
       } catch (err) {
-        console.log(err)
+        let message = ''
+
+        switch (err.code) {
+          case 'auth/user-not-found':
+            message = 'Não foi possível localizar o usuário.'
+            break
+          case 'auth/wrong-password':
+            message = 'Senha inválida'
+            break
+          default:
+            message = 'Não foi possível fazer login, tente novamente'
+        }
+
+        this.$root.$emit('Notification::show', {
+          message,
+          type: 'danger'
+        })
       }
 
       this.loading = false
