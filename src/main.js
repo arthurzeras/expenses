@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import FirebaseVue from './firebase'
 import './assets/scss/app.scss'
+import './utils/directives'
 
 Vue.use(FirebaseVue)
 Vue.config.productionTip = false
