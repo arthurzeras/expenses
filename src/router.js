@@ -14,14 +14,14 @@ const router = new Router({
       component: () => import(/* webpackChunkName: "home" */ './pages/home/Home')
     },
     {
-      name: 'lista-gastos',
-      path: '/lista-gastos',
+      name: 'expenses-list',
+      path: '/expenses-list',
       meta: {
         icon: 'list-ul', title: 'Lista Gastos'
       },
       component: () => import(
-        /* webpackChunkName: "lista-gastos" */
-        './pages/lista-gastos/ListaGastos'
+        /* webpackChunkName: "expenses-list" */
+        './pages/expenses-list/ExpensesList'
       )
     },
     {
