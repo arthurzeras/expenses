@@ -13,17 +13,19 @@
       </div>
     </div>
 
-    <div class="container">
-      <div v-if="!activeMonth.data.length">
-        Você não cadastrou nenhum neste mês
+    <div class="container-group">
+      <div class="container">
+        <div v-if="activeMonth.data && !activeMonth.data.length">
+          Você não cadastrou nenhum neste mês
+        </div>
+        <template v-else>
+          <expense-list-item
+            :key="index"
+            :data="item"
+            v-for="(item, index) in activeMonth.data"
+          />
+        </template>
       </div>
-      <template v-else>
-        <expense-list-item
-          :key="index"
-          :data="item"
-          v-for="(item, index) in activeMonth.data"
-        />
-      </template>
     </div>
   </div>
 </template>
@@ -131,9 +133,15 @@ export default {
   }
 }
 
-.container {
-  font-size: 15pt;
-  padding-top: 15px;
-  padding-bottom: 15px;
+.container-group {
+  margin-left: -15px;
+  overflow: hidden auto;
+  width: calc(100% + 30px);
+  height: calc(100vh - 69px);
+  .container {
+    font-size: 15pt;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
 }
 </style>
