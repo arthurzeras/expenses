@@ -27,7 +27,6 @@ tambem o storage para salvar a imagem do comprovante caso o usuário queira inse
 Para criar os arquivos minificados prontos para serem colocados em um servidor web basta executar
 ``` 
 npm run build
-
 ```
 
 ### Fazer o deploy para o firebase
@@ -35,14 +34,14 @@ npm run build
 Para usar o serviço de hosting do firebase basta executar os seguintes passos:
 
 - Crie uma pasta deploy na raiz do projeto;
-- Com o (firebase-tools)[https://github.com/firebase/firebase-tools] instalado na máquina execute `firebase init` dentro da pasta deploy recém criada;
+- Com o [firebase-tools](https://github.com/firebase/firebase-tools) instalado na máquina execute `firebase init` dentro da pasta deploy recém criada;
 
 Se estiver no Linux ou MacOS basta executar 
 ```
 npm run deploy
 ```
 
-No windos é preciso fazer o procedimento na mão:
+No windows é preciso fazer o procedimento na mão:
 
 - Execute `npm run build`;
 - Copie o conteúdo de dentro da pasta /dist para dentro da pasta /deploy/public;

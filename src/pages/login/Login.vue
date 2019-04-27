@@ -41,11 +41,15 @@
 <script>
 export default {
   name: 'Login',
-  data: () => {
-    return {
-      loading: false,
-      password: process.env.NODE_ENV === 'development' ? '123123' : '',
-      email: process.env.NODE_ENV === 'development' ? 'arthur@expenses.com.br' : ''
+  data: () => ({
+    email: '',
+    password: '',
+    loading: false
+  }),
+  mounted () {
+    if (process.env.NODE_ENV === 'development') {
+      this.email = process.env.VUE_APP_LOGIN_EMAIL
+      this.password = process.env.VUE_APP_LOGIN_PASS
     }
   },
   methods: {
