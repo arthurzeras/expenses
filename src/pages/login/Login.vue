@@ -44,8 +44,8 @@ export default {
   data: () => {
     return {
       loading: false,
-      email: 'arthur@expenses.com.br',
-      password: '123123'
+      password: process.env.NODE_ENV === 'development' ? '123123' : '',
+      email: process.env.NODE_ENV === 'development' ? 'arthur@expenses.com.br' : ''
     }
   },
   methods: {
