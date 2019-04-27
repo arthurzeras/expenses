@@ -69,3 +69,4 @@ No windows é preciso fazer o procedimento na mão:
 - [#15 - Iniciando página da lista de gastos](https://youtu.be/gygePLUeFuc)
 - [#16 - Listando gastos por mês](https://youtu.be/Y8OY9QuDUfE)
 - [#17 - Abrindo comprovante e adicionando rolagem nos itens](https://youtu.be/5J9CKq5RLCc)
+- [#18 - Fazendo deploy no Firebase](https://youtu.be/d-_JA-RDrbw)
