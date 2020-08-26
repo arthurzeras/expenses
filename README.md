@@ -7,19 +7,16 @@ tambem o storage para salvar a imagem do comprovante caso o usuário queira inse
 
 ## Conteúdos
 
-- [Expenses 💰💵💴💶💷💰](#expenses-)
-  - [Conteúdos](#conteúdos)
-  - [Tecnologias principais](#tecnologias-principais)
-    - [Rodando o projeto local](#rodando-o-projeto-local)
-    - [Compilar arquivos minificados para produção](#compilar-arquivos-minificados-para-produção)
-    - [Fazer o deploy para o firebase](#fazer-o-deploy-para-o-firebase)
-  - [That's all folks](#thats-all-folks)
-    - [Caso desejar, o link para os vídeos estão a seguir](#caso-desejar-o-link-para-os-vídeos-estão-a-seguir)
+- [Tecnologias principais](#tecnologias-principais)
+- [Rodando o projeto local](#rodando-o-projeto-local)
+- [Compilar arquivos minificados para produção](#compilar-arquivos-minificados-para-produção)
+- [Fazer o deploy para o firebase](#fazer-o-deploy-para-o-firebase)
+- [Playlist passo a passo da construção do projeto](#caso-desejar-o-link-para-os-vídeos-estão-a-seguir)
 
 ## Tecnologias principais
 
-- Vue.js v2.6.12
-- Vue Router v3.4.3
+- Vue.js v2.6.11
+- Vue Router v3.2.0
 - Firebase v7.19.0
 - Bootstrap v4.5.2
 
@@ -48,7 +45,7 @@ npm run build
 Para usar o serviço de hosting do firebase basta executar os seguintes passos:
 
 - Crie uma pasta deploy na raiz do projeto;
-- Com o [firebase-tools](https://github.com/firebase/firebase-tools) instalado na máquina execute `firebase init` dentro da pasta deploy recém criada;
+- Com o [firebase-tools](https://github.com/firebase/firebase-tools) instalado na máquina execute `firebase init` dentro da pasta deploy recém criada.
 
 Se estiver no Linux ou MacOS basta executar
 
@@ -60,7 +57,7 @@ No windows é preciso fazer o procedimento na mão:
 
 - Execute `npm run build`;
 - Copie o conteúdo de dentro da pasta /dist para dentro da pasta /deploy/public;
-- Execute `firebase deploy` dentro da pasta /deploy;
+- Execute `firebase deploy` dentro da pasta /deploy.
 
 ## That's all folks
 
