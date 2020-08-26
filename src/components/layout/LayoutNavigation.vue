@@ -13,30 +13,36 @@
         {{ router.meta.title }}
       </router-link>
 
-      <hr>
+      <hr />
 
-      <layout-new-expense/>
+      <layout-new-expense />
     </div>
 
-    <layout-logout/>
+    <layout-logout />
   </nav>
 </template>
 
 <script>
-import LayoutLogout from './LayoutLogout'
-import LayoutNewExpense from './LayoutNewExpense'
+/* eslint-disable semi */
+/* eslint-disable quotes */
+/* eslint-disable comma-dangle */
+/* eslint-disable space-before-function-paren */
+import LayoutLogout from "./LayoutLogout";
+import LayoutNewExpense from "./LayoutNewExpense";
 
 export default {
   components: {
     LayoutLogout,
-    LayoutNewExpense
+    LayoutNewExpense,
   },
   computed: {
-    routerLinks () {
-      return this.$router.options.routes.filter(r => r.name !== 'login')
-    }
-  }
-}
+    routerLinks() {
+      return this.$router.options.routes.filter(
+        (r) => r.name !== "login" && r.name !== "register"
+      );
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">
@@ -46,7 +52,7 @@ export default {
   height: calc(100vh - 49px);
   .nav-link {
     color: var(--white);
-    transition: .4s;
+    transition: 0.4s;
     &.active {
       color: var(--featured);
       background-color: transparent;
