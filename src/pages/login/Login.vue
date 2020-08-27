@@ -35,68 +35,57 @@
 </template>
 
 <script>
-/* eslint-disable no-undef */
-/* eslint-disable space-before-function-paren */
-/* eslint-disable quotes */
-/* eslint-disable semi */
-/* eslint-disable comma-dangle */
 export default {
-  name: "Login",
+  name: 'Login',
   data: () => ({
-    email: "",
-    password: "",
-    loading: false,
+    email: '',
+    password: '',
+    loading: false
   }),
-  mounted() {
-    if (process.env.NODE_ENV === "development") {
-      this.email = process.env.VUE_APP_LOGIN_EMAIL;
-      this.password = process.env.VUE_APP_LOGIN_PASS;
+  mounted () {
+    if (process.env.NODE_ENV === 'development') {
+      this.email = process.env.VUE_APP_LOGIN_EMAIL
+      this.password = process.env.VUE_APP_LOGIN_PASS
     }
   },
   methods: {
-    async doLogin() {
-      this.loading = true;
-      const { email, password } = this;
-
+    async doLogin () {
+      this.loading = true
+      const { email, password } = this
       try {
         const res = await this.$firebase
           .auth()
-          .signInWithEmailAndPassword(email, password);
-
-        window.uid = res.user.uid;
-
-        this.$router.push({ name: "home" });
+          .signInWithEmailAndPassword(email, password)
+        window.uid = res.user.uid
+        this.$router.push({ name: 'home' })
       } catch (err) {
-        let message = "";
-
+        let message = ''
         switch (err.code) {
-          case "auth/user-not-found":
-            message = "Não foi possível localizar o usuário.";
-            break;
-          case "auth/wrong-password":
-            message = "Senha inválida";
-            break;
+          case 'auth/user-not-found':
+            message = 'Não foi possível localizar o usuário.'
+            break
+          case 'auth/wrong-password':
+            message = 'Senha inválida'
+            break
           default:
-            message = "Não foi possível fazer login, tente novamente";
+            message = 'Não foi possível fazer login, tente novamente'
         }
-
-        this.$root.$emit("Notification::show", {
+        this.$root.$emit('Notification::show', {
           message,
-          type: "danger",
-        });
+          type: 'danger'
+        })
       }
-
-      this.loading = false;
-    },
+      this.loading = false
+    }
   },
-  beforeRouteEnter(to, from, next) {
+  beforeRouteEnter (to, from, next) {
     next((vm) => {
       if (window.uid) {
-        vm.$router.push({ name: "home" });
+        vm.$router.push({ name: 'home' })
       }
-    });
-  },
-};
+    })
+  }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -58,7 +58,7 @@
   }
   .card {
     width: 30%;
-    color: var(--darker);
+    color: var(--darker)
   }
 }
 .link {
@@ -66,43 +66,68 @@
   text-decoration: none;
   &:hover {
     color: var(--featured-dark);
-    text-decoration: underline;
+    text-decoration: underline
   }
 }
 </style>
 
 <script>
-/* eslint-disable no-undef */
-/* eslint-disable space-before-function-paren */
-/* eslint-disable quotes */
-/* eslint-disable semi */
-/* eslint-disable comma-dangle */
-import firebase from "firebase";
-
 export default {
-  name: "Register",
-  created() {
-    firebase
-      .auth()
-      .onAuthStateChanged((user) => (this.authenticatedUser = user));
-  },
-  asyncData() {
+  name: 'Register',
+  data: () => {
     return {
-      email: "",
-      password: "",
-      registrationPassword: "",
-    };
+      loading: false,
+      email: '',
+      password: '',
+      registrationPassword: ''
+    }
   },
   methods: {
-    register() {
-      if (this.password === this.registrationPassword) {
-        firebase
-          .auth()
-          .createUserWithEmailAndPassword(this.email, this.password);
-      } else {
-        // display error message
+    async register () {
+      this.loading = true
+      const { email, password, registrationPassword } = this
+
+      try {
+        if (password === registrationPassword) {
+          const res = await this.$firebase.auth()
+            .createUserWithEmailAndPassword(email, password)
+
+          window.uid = res.user.uid
+
+          this.$router.push({ name: 'home' })
+        } else {
+          let message = 'Senhas diferentes, por favor, tente de novo.'
+          this.$root.$emit('Notification::show', {
+            message,
+            type: 'danger'
+          })
+          this.password = '' // Limpa o input de senha
+          this.registrationPassword = '' // Limpa o input de senha
+        }
+      } catch (err) {
+        console.log(err)
+        let message = ''
+
+        switch (err.code) {
+          case 'auth/email-already-in-use':
+            message = 'O endereço de e-mail já está em uso por outra conta.'
+            this.email = '' // Limpa o input de E-mail
+            break
+          case 'auth/wrong-password':
+            message = 'Senha inválida'
+            break
+          default:
+            message = 'Não foi possível criar a conta, tente novamente'
+        }
+
+        this.$root.$emit('Notification::show', {
+          message,
+          type: 'danger'
+        })
       }
-    },
-  },
-};
+
+      this.loading = false
+    }
+  }
+}
 </script>

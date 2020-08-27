@@ -34,7 +34,7 @@ const router = new Router({
       name: 'register',
       path: '/register',
       meta: { title: 'Register' },
-      component: () => import(/* webpackChunkName: "login" */ './pages/register/Register')
+      component: () => import(/* webpackChunkName: "register" */ './pages/register/Register')
     }
   ]
 })
