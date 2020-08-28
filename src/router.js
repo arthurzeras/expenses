@@ -29,6 +29,12 @@ const router = new Router({
       path: '/login',
       meta: { title: 'Login' },
       component: () => import(/* webpackChunkName: "login" */ './pages/login/Login')
+    },
+    {
+      name: 'register',
+      path: '/register',
+      meta: { title: 'Register' },
+      component: () => import(/* webpackChunkName: "register" */ './pages/register/Register')
     }
   ]
 })
@@ -36,7 +42,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   document.title = `${to.meta.title} - Expenses`
 
-  if (!window.uid && to.name !== 'login') {
+  if (!window.uid && to.name !== 'login' && to.name !== 'register') {
     next({ name: 'login' })
   } else {
     next()

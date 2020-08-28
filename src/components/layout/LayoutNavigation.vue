@@ -33,7 +33,7 @@ export default {
   },
   computed: {
     routerLinks () {
-      return this.$router.options.routes.filter(r => r.name !== 'login')
+      return this.$router.options.routes.filter(r => r.name !== 'login' && r.name !== 'register')
     }
   }
 }

@@ -6,13 +6,7 @@
       </div>
       <div class="card-body">
         <div class="form-group">
-          <input
-            required
-            type="email"
-            v-model="email"
-            class="form-control"
-            placeholder="E-mail"
-          >
+          <input required type="email" v-model="email" class="form-control" placeholder="E-mail" />
         </div>
         <div class="form-group">
           <input
@@ -21,7 +15,7 @@
             v-model="password"
             class="form-control"
             placeholder="Senha"
-          >
+          />
         </div>
         <button class="btn btn-primary w-100" :disabled="loading">
           <template v-if="loading">
@@ -33,6 +27,8 @@
             <i class="fa fa-sign-in-alt"></i>
           </template>
         </button>
+        Não tem conta?
+        <router-link to="/register" class="link mt-4">Clique aqui para Registrar</router-link>
       </div>
     </div>
   </form>
@@ -56,16 +52,14 @@ export default {
     async doLogin () {
       this.loading = true
       const { email, password } = this
-
       try {
-        const res = await this.$firebase.auth().signInWithEmailAndPassword(email, password)
-
+        const res = await this.$firebase
+          .auth()
+          .signInWithEmailAndPassword(email, password)
         window.uid = res.user.uid
-
         this.$router.push({ name: 'home' })
       } catch (err) {
         let message = ''
-
         switch (err.code) {
           case 'auth/user-not-found':
             message = 'Não foi possível localizar o usuário.'
@@ -76,18 +70,16 @@ export default {
           default:
             message = 'Não foi possível fazer login, tente novamente'
         }
-
         this.$root.$emit('Notification::show', {
           message,
           type: 'danger'
         })
       }
-
       this.loading = false
     }
   },
   beforeRouteEnter (to, from, next) {
-    next(vm => {
+    next((vm) => {
       if (window.uid) {
         vm.$router.push({ name: 'home' })
       }
@@ -108,6 +100,14 @@ export default {
   .card {
     width: 30%;
     color: var(--darker);
+  }
+}
+.link {
+  color: var(--featured);
+  text-decoration: none;
+  &:hover {
+    color: var(--featured-dark);
+    text-decoration: underline;
   }
 }
 </style>
