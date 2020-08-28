@@ -105,7 +105,6 @@ export default {
           this.registrationPassword = '' // Limpa o input de senha
         }
       } catch (err) {
-        console.log(err)
         let message = ''
 
         switch (err.code) {
